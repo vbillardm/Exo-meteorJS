@@ -1,0 +1,12 @@
+{
+	"fruits": [{
+		"banane": 2,
+		"kiwi": 7,
+		"pomme": 123
+	}],
+	"moteur": [{
+		"V8": "chrome",
+		"op": "chakra"
+	}],
+	"name": "toto"
+}
