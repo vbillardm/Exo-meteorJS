@@ -1,6 +1,6 @@
 <template name="one">
     <p>
-      <span class="content col-md-10" id="edit"> {{data.content}} </span>
+      <input type="text" readonly class="content col-md-10" id="edit" {{data.content}}>
       <button class="btn btn-sm btn-danger" id="delete" type="submit">Delete</button>
       <button class="btn btn-sm" id="edit" type="submit">Edit</button>
     </p>

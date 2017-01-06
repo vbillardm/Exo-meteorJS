@@ -1,0 +1,16 @@
+<template name="chatForm">
+  <div class="form-group">
+     <label class="control-label">Chat</label>
+     <div class="input-group">
+        <input type="text" id="chat" class="form-control">
+        <span class="input-group-btn">
+          <button class="btn btn-success" id="envoyer" type="button">Envoyer</button>
+        </span>
+     </div>
+  </div>
+  {{ #each messages }}
+    {{> chat }}
+    <br>
+  {{/each}}
+
+</template>

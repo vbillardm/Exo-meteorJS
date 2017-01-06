@@ -4,7 +4,7 @@ import { ReactiveVar } from 'meteor/reactive-var';
 import './main.html';
 
 Template.posts.helpers({
-  list: function(){return Post.find();}
+  list: function(){ return Post.find();}
 });
 
 Template.post.events({
@@ -39,26 +39,42 @@ Template.one.events({
   }
 });
 
-Template.post.editing = function() {
-  return Session.get("target" + this._id);
-};
 
 Template.post.events({
-  "click #edit": function(e, t) {
-    return Session.set("target" + t.data._id, true);
-  },
-  "keypress input": function(e, t) {
-    var post;
-    if (e.keyCode === 13) {
-      post = Post.findOne(t.data);
-      Post.update({
-        _id: post._id
-      }, {
-        $set: {
-          content: e.currentTarget.value
-        }
-      });
-      return Session.set("target" + t.data._id, false);
-    }
+  "click #edit": function(e,t) {
+     var name = e.currentTarget.getAttribute("name");
+     var content = document.getElementsByName(name);
+     // remove attr
+     post = Post.findOne({"content":content[0].value});
+     content[0].removeAttribute("readonly");
+     // on blur
+     content[0].addEventListener("blur", function( event )
+     {
+         Post.update({
+           _id: post._id
+         }, {
+           $set: {
+             content: content[0].value
+           }
+         });
+         content[0].setAttribute("readonly","true");
+    }, true);
   }
+});
+Template.chatForm.events({
+  "click #envoyer": function(e, t) {
+    var value = document.getElementById("chat").value;
+    var post;
+     Message.insert({
+      message: value,
+      createdAt: Date.now()
+    }
+  );
+    return document.getElementById("chat").value= "";
+  }
+});
+
+Template.chatForm.helpers({
+  messages: function()
+   { return Message.find({},{sort:{"createdAt":-1}},{limit:10});}
 });

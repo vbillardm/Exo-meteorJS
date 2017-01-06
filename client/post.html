@@ -3,8 +3,9 @@
     <input type="text"  value="{{content}}" />
   {{else}}
     <p>
-      <span class="content col-md-10" id="edit"> {{content}} </span>
+      <input type="text" readonly=true class="content col-md-10" name="{{content}}" value="{{content}}">
       <button class="btn btn-sm btn-danger" id="delete" type="submit">Delete</button>
+      <button class="btn btn-sm " id="edit" type="submit" name="{{content}}">Edit</button>
     </p>
     {{/if}}
 </template>
