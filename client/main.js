@@ -71,10 +71,24 @@ Template.chatForm.events({
     }
   );
     return document.getElementById("chat").value= "";
+  },
+  'keyup input':function(event)
+  {
+    if(event.which === 13)
+    {
+        var value = document.getElementById("chat").value;
+        var post;
+         Message.insert({
+          message: value,
+          createdAt: Date.now()
+        }
+      );
+      document.getElementById("chat").value="";
+    }
   }
 });
 
 Template.chatForm.helpers({
   messages: function()
-   { return Message.find({},{sort:{"createdAt":-1}},{limit:10});}
+   { return Message.find({},{sort:{"createdAt":-1},limit:10});}
 });
